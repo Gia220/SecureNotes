@@ -1,0 +1,64 @@
+// app/build.gradle
+
+plugins {
+    id 'com.android.application' // QUESTO DEVE ESSERE QUI
+    // Altri plugin specifici del modulo (es. 'org.jetbrains.kotlin.android' se usi Kotlin)
+}
+
+android { // Questo blocco VIENE DOPO i plugins
+    namespace 'com.example.securenotes' // Assicurati che il tuo namespace sia qui
+    compileSdk 34 // O la versione più recente disponibile
+
+    defaultConfig {
+        applicationId "com.example.securenotes"
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies { // Questo blocco VIENE DOPO 'android'
+    // Dipendenze di base per l'UI
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // Jetpack Security
+    implementation 'androidx.security:security-crypto:1.1.0-alpha07'
+    implementation 'androidx.biometric:biometric:1.2.0-alpha05'
+    // Room Database
+    implementation 'androidx.room:room-runtime:2.6.1'
+    annotationProcessor 'androidx.room:room-compiler:2.6.1'
+
+    // WorkManager
+    implementation 'androidx.work:work-runtime:2.9.0'
+
+    // Per la compressione/decompressione .zip
+    implementation 'net.lingala.zip4j:zip4j:2.11.2'
+    implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    // Test dependencies
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+}

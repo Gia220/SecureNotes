@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".ui.noteeditor.NoteEditorActivity">
+
+    <EditText
+        android:id="@+id/edit_text_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Title"
+        android:inputType="textCapSentences"
+        android:maxLines="1"
+        android:padding="8dp"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edit_text_tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:hint="Tag "
+        android:inputType="textCapSentences"
+        android:maxLines="1"
+        android:padding="8dp"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/edit_text_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="10dp"
+        android:gravity="top"
+        android:hint="Note content"
+        android:inputType="textMultiLine"
+        android:padding="8dp"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Self-destruction:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/self_destruct_date_time_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            tools:text="" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="8dp">
+
+            <Button
+                android:id="@+id/set_autodestruct_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set time"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:minHeight="0dp" android:paddingTop="0dp"
+                android:paddingBottom="0dp"/>
+
+            <Button
+                android:id="@+id/clear_autodestruct_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete"
+                android:visibility="gone"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:minHeight="0dp" android:paddingTop="0dp"
+                android:paddingBottom="0dp"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/autodestruct_min_warning_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="The minimum self-destruction time is 1 minutes."
+        android:textColor="@android:color/darker_gray"
+        android:textSize="12sp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"/>
+
+    <Button
+        android:id="@+id/button_save_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="16dp"
+        android:text="Save Note" />
+
+</LinearLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.SecureNotes" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/app_primary</item>
+        <item name="colorOnPrimary">@color/app_onPrimary</item>
+        <item name="colorPrimaryInverse">@color/app_primary_inverse</item>
+        <item name="colorPrimaryContainer">@color/app_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/app_onPrimaryContainer</item>
+
+        <item name="colorSecondary">@color/app_secondary</item>
+        <item name="colorOnSecondary">@color/app_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/app_secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/app_onSecondaryContainer</item>
+
+        <item name="colorTertiary">@color/app_tertiary</item>
+        <item name="colorOnTertiary">@color/app_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/app_tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/app_onTertiaryContainer</item>
+
+        <item name="colorError">@color/app_error</item>
+        <item name="colorOnError">@color/app_onError</item>
+        <item name="colorErrorContainer">@color/app_error_container</item>
+        <item name="colorOnErrorContainer">@color/app_onError_container</item>
+
+        <item name="android:colorBackground">@color/app_background</item>
+        <item name="colorOnBackground">@color/app_onBackground</item>
+        <item name="colorSurface">@color/app_surface</item>
+        <item name="colorOnSurface">@color/app_onSurface</item>
+        <item name="colorSurfaceVariant">@color/app_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/app_onSurface_variant</item>
+        <item name="colorOutline">@color/app_outline</item>
+
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
+    </style>
+
+    <style name="Theme.SecureNotes" parent="Base.Theme.SecureNotes" />
+</resources>
