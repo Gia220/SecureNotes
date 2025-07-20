@@ -64,7 +64,7 @@ public class FileArchiveViewModel extends AndroidViewModel {
             } catch (IOException | GeneralSecurityException e) {
                 Log.e(TAG, "Errore durante la decrittografia del file per la visualizzazione: " + archivedFile.getOriginalName(), e);
                 decryptedFileLiveData.postValue(null); // Segnala errore alla UI
-                // Puoi anche usare un LiveData per notificare specifici errori
+
             }
         });
         return decryptedFileLiveData;
