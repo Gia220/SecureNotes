@@ -26,7 +26,7 @@ public class SecurityUtils {
     private static final String KEY_FILE_MASTER_SEED = "file_master_seed"; // Seed per la MasterKey dei file (PBKDF2)
 
     private static final int AES_KEY_SIZE_BITS = 256;
-    // Per AES/GCM, l'IV è tipicamente 12 byte (96 bit) raccomandato, ma possiamo usare 16.
+
     public static final int GCM_IV_SIZE_BYTES = 12; // Modificato per GCM raccomandato (96 bit)
     private static final int GCM_TAG_LENGTH_BITS = 128; // Lunghezza del tag di autenticazione GCM (128 bit)
 
