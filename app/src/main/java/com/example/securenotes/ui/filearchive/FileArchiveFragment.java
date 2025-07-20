@@ -41,9 +41,9 @@ public class FileArchiveFragment extends Fragment {
     private FloatingActionButton addFileFab;
 
     // Launcher per selezionare un file dal sistema
-    private ActivityResultLauncher<Intent> pickFileLauncher = registerForActivityResult(        //apre il file( avvia un altra activity)
-            new ActivityResultContracts.StartActivityForResult(),                                //eseguita quando l'utente seleziona un file
-            result -> {
+    private ActivityResultLauncher<Intent> pickFileLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {                                                                 //dichiarazione del picker
                 if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
                     Uri uri = result.getData().getData();
                     if (uri != null) {
@@ -53,7 +53,7 @@ public class FileArchiveFragment extends Fragment {
 
                             Toast.makeText(getContext(), "Uploading and Encrypting " + originalFileName + "...", Toast.LENGTH_SHORT).show();
 
-                            fileArchiveViewModel.uploadAndEncryptFile(uri, originalFileName, mimeType);     //apre file
+                            fileArchiveViewModel.uploadAndEncryptFile(uri, originalFileName, mimeType);     //carica file
 
                         } catch (Exception e) {
                             Log.e(TAG, "Errore durante la selezione o l'upload del file", e);
@@ -69,7 +69,7 @@ public class FileArchiveFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_file_archive, container, false);
 
-        // Inizializzazione della RecyclerView
+
         RecyclerView recyclerView = view.findViewById(R.id.files_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
@@ -146,7 +146,7 @@ public class FileArchiveFragment extends Fragment {
                 }
             }
         }
-        if (result == null) {
+        if (result == null) {                                               //dal path prende il nome del file
             result = uri.getPath();
             int cut = result.lastIndexOf('/');
             if (cut != -1) {

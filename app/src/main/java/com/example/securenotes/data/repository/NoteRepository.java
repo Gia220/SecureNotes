@@ -51,7 +51,7 @@ public class NoteRepository {
         executorService = Executors.newSingleThreadExecutor();
         this.applicationContext = application.getApplicationContext();
 
-        allEncryptedNotes.observeForever(encryptedList -> {
+        allEncryptedNotes.observeForever(encryptedList -> {             //osserva le note per tutto la durata dell'app
             executorService.execute(() -> {
                 List<Note> decryptedList = new ArrayList<>();
                 SecretKey noteSecretKey = null;
@@ -82,14 +82,13 @@ public class NoteRepository {
         return allDecryptedNotes;
     }
 
-    // --- NUOVA VERSIONE DEL METODO INSERT CON CALLBACK ---
+
     public void insert(Note note, OnNoteInsertedCallback callback) {
         executorService.execute(() -> {
             try {
                 SecretKey noteSecretKey = SecurityUtils.getOrCreateNotesAndFilesAesKey(applicationContext);
                 if (noteSecretKey == null) {
                     Log.e(TAG, "Chiave AES per note non disponibile. Impossibile criptare/salvare la nota.");
-                    // Potresti voler notificare un errore anche tramite la callback
                     return;
                 }
                 String encryptedContent = encrypt(note.getContent(), noteSecretKey);
@@ -97,16 +96,10 @@ public class NoteRepository {
 
                 Log.d(TAG, "Inserting note with selfDestructTimestamp: " + note.getSelfDestructTimestamp());
 
-                long newId = noteDao.insert(note); // Ottieni l'ID qui!
+                long newId = noteDao.insert(note);
 
                 // Esegui la callback sul thread principale (UI thread)
                 if (callback != null) {
-                    // Poiché la callback viene chiamata dal tuo executorService,
-                    // devi assicurarti che venga eseguita sull'UI thread se aggiorna la UI.
-                    // Il ViewModel si occupa di questo, ma il Repository non lo sa.
-                    // Per sicurezza, potresti voler aggiungere un gestore per postare sull'UI thread se la callback lo richiede.
-                    // Ad esempio: new Handler(Looper.getMainLooper()).post(() -> callback.onNoteInserted((int) newId));
-                    // Tuttavia, se il ViewModel gestirà la callback e la UI, non è strettamente necessario qui.
                     callback.onNoteInserted((int) newId);
                 }
 
@@ -116,10 +109,7 @@ public class NoteRepository {
         });
     }
 
-    // --- METODO INSERT PRECEDENTE (DA RIMUOVERE O MODIFICARE SE LO USI ALTROVE) ---
-    // Se hai altri punti nel codice che chiamano `insert(Note note)` senza callback,
-    // dovrai decidere se modificarli per usare la callback o se mantenere un overload.
-    // Per completezza, potresti avere anche:
+
     public void insert(Note note) {
         insert(note, null); // Chiama il metodo con callback, passando null se non ti interessa l'ID
     }
@@ -219,7 +209,7 @@ public class NoteRepository {
         }
     }
 
-    // --- INTERFACCIA DI CALLBACK PER L'INSERIMENTO DI NOTE ---
+
     public interface OnNoteInsertedCallback {
         void onNoteInserted(int noteId);
     }

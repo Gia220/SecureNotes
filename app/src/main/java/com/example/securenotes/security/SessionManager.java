@@ -1,4 +1,4 @@
-//. Il Looper è il meccanismo interno di un thread che gli permette di processare una coda di messaggi e Runnable, io aggiungo dopo X min un rannable tramite l'heandler
+//Il Looper è il meccanismo interno di un thread che gli permette di processare una coda di messaggi e Runnable, io aggiungo dopo X min un rannable tramite l'heandler
 
 
 package com.example.securenotes.security;
@@ -177,7 +177,7 @@ public class SessionManager implements Application.ActivityLifecycleCallbacks {
             // Se l'ultima Activity è stoppata (l'app è andata completamente in background)
             // Il timer è già stato avviato in onActivityPaused.
             Log.d(TAG, "App è andata in background completo (onActivityStopped).");
-            saveLastActiveTimestamp(); // Assicurati che l'ultimo timestamp sia salvato
+            saveLastActiveTimestamp();
         }
     }
 

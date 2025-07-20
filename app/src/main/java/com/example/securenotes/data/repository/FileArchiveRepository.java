@@ -32,7 +32,7 @@ import java.util.concurrent.Executors;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
-import javax.crypto.spec.GCMParameterSpec; // <<< NUOVO: Importa GCMParameterSpec
+import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.IvParameterSpec;
 
 
@@ -107,7 +107,7 @@ public class FileArchiveRepository {
 
 
         byte[] iv = SecurityUtils.generateRandomIv();
-        GCMParameterSpec gcmSpec = new GCMParameterSpec(SecurityUtils.getGcmTagLengthBytes() * 8, iv); // Tag length in bits, IV
+        GCMParameterSpec gcmSpec = new GCMParameterSpec(SecurityUtils.getGcmTagLengthBytes() * 8, iv);
 
         Cipher cipher = Cipher.getInstance(TRANSFORMATION);
         cipher.init(Cipher.ENCRYPT_MODE, fileSecretKey, gcmSpec);

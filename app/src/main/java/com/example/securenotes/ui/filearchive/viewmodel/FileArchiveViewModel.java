@@ -48,12 +48,12 @@ public class FileArchiveViewModel extends AndroidViewModel {
                 }
             } catch (IOException | GeneralSecurityException e) {
                 Log.e(TAG, "Errore durante l'upload e la crittografia del file: " + originalFileName, e);
-                // Puoi usare un LiveData per notificare la UI di questo errore
+
             }
         });
     }
 
-    // Metodo per decriptare un file per la visualizzazione
+
     public LiveData<File> decryptFileForViewing(ArchivedFile archivedFile) {
         MutableLiveData<File> decryptedFileLiveData = new MutableLiveData<>();
         viewModelExecutor.execute(() -> {
@@ -83,10 +83,8 @@ public class FileArchiveViewModel extends AndroidViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        // Quando il ViewModel non è più usato, pulisci i thread e i file temporanei
+
         viewModelExecutor.shutdownNow();
-        // Non pulire i file temporanei qui, perché il ViewModel potrebbe essere cancellato
-        // mentre un'attività che lo osserva è ancora attiva. Meglio chiamare cleanTempFiles
-        // da onStop() o onDestroy() dell'Activity.
+
     }
 }

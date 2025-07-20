@@ -28,14 +28,12 @@ public class NoteViewModel extends AndroidViewModel {
         return filteredNotes; // Restituisce i note filtrati o tutti i note se nessun filtro
     }
 
-    // --- NUOVA VERSIONE DEL METODO INSERT CON CALLBACK ---
+
     public void insert(Note note, NoteRepository.OnNoteInsertedCallback callback) {
         repository.insert(note, callback);
     }
 
-    // Se hai altri punti nel codice che chiamano `insert(Note note)` senza callback,
-    // dovrai decidere se modificarli per usare la callback o se mantenere un overload.
-    // Per completezza, potresti avere anche:
+
     public void insert(Note note) {
         repository.insert(note); // Chiama il metodo senza callback se non ti interessa l'ID
     }
@@ -50,7 +48,7 @@ public class NoteViewModel extends AndroidViewModel {
     }
 
     public void filterByTag(String tag) {
-        if (tag == null || tag.trim().isEmpty() || tag.equalsIgnoreCase("all")) {
+        if (tag == null) {
             filteredNotes = allNotes; // Mostra tutte le note se il tag è vuoto o "all"
         } else {
             // Esegue la ricerca tramite il repository, che gestisce la decrittografia

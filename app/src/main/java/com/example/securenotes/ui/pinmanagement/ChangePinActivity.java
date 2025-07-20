@@ -1,23 +1,23 @@
-package com.example.securenotes.ui.pinmanagement; // Assicurati che il package sia corretto
+package com.example.securenotes.ui.pinmanagement;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
-import android.view.MenuItem; // Importa MenuItem
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar; // Importa ActionBar
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.securenotes.R; // Assicurati che R sia corretto per il tuo package
+import com.example.securenotes.R;
 import com.example.securenotes.security.SecurityUtils;
-import com.example.securenotes.security.SessionManager; // Potrebbe non servire qui direttamente, ma è un import comune
-import com.example.securenotes.SecureNotesApplication; // Per accedere al SessionManager (se necessario per logout)
-import com.example.securenotes.ui.login.LoginActivity; // Per eventuale reindirizzamento al login dopo cambio PIN
-import com.example.securenotes.utils.Constants; // Per KEY_USER_PIN
+import com.example.securenotes.security.SessionManager;
+import com.example.securenotes.SecureNotesApplication;
+import com.example.securenotes.ui.login.LoginActivity;
+import com.example.securenotes.utils.Constants;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -27,7 +27,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.IvParameterSpec;
 
-import static javax.crypto.Cipher.DECRYPT_MODE; // Importa DECRYPT_MODE
+import static javax.crypto.Cipher.DECRYPT_MODE;
 
 public class ChangePinActivity extends AppCompatActivity {
 
@@ -62,7 +62,7 @@ public class ChangePinActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish(); // Chiudi l'Activity corrente
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

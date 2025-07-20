@@ -27,13 +27,13 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> { 
     @NonNull
     @Override
     public NoteHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {         //Viene chiamato quando la RecyclerView ha bisogno di creare una nuova View( mostrare un nuovo elemento)
-        View itemView = LayoutInflater.from(parent.getContext())                // Ottiene un LayoutInflater dal contesto del parent
-                .inflate(R.layout.note_item, parent, false);        //crea il layout, ma false non la fa visualizzare
+        View itemView = LayoutInflater.from(parent.getContext())                            // Ottiene un LayoutInflater dal contesto del parent
+                .inflate(R.layout.note_item, parent, false);                    //crea il layout, ma false non la fa visualizzare
         return new NoteHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NoteHolder holder, int position) {            //Viene chiamato dalla RecyclerView ogni volta che deve visualizzare o aggiornare i dati di un elemento in una specifica posizione della lista
+    public void onBindViewHolder(@NonNull NoteHolder holder, int position) {                //Viene chiamato dalla RecyclerView ogni volta che deve visualizzare o aggiornare i dati di un elemento in una specifica posizione della lista
         Note currentNote = notes.get(position);
         holder.textViewTitle.setText(currentNote.getTitle());
         holder.textViewContentPreview.setText(currentNote.getContent());

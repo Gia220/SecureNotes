@@ -25,7 +25,7 @@ public class NoteSelfDestructReceiver extends BroadcastReceiver {
             Log.d(TAG, "onReceive: Tentativo di autodistruzione per nota ID: " + noteId);
 
             if (noteId != -1) {
-                // Esegui l'eliminazione della nota in un thread separato
+                // esegue l'eliminazione della nota in un thread separato
                 new Thread(() -> {
                     NoteDao noteDao = AppDatabase.getDatabase(context).noteDao();
                     Note noteToDelete = noteDao.getNoteById(noteId);

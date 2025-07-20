@@ -66,7 +66,7 @@ public class NotesFragment extends Fragment {
                         AlarmManager alarmManager = (AlarmManager) requireContext().getSystemService(Context.ALARM_SERVICE);
                         if (alarmManager != null && alarmManager.canScheduleExactAlarms()) {
                             Log.d(TAG, "Permesso SCHEDULE_EXACT_ALARM concesso dopo la richiesta. Avvio NoteEditorActivity.");
-                            // Permission granted, now launch NoteEditorActivity
+
                             startNoteEditorActivity();
                         } else {
                             Log.w(TAG, "Permesso SCHEDULE_EXACT_ALARM negato dopo la richiesta.");
@@ -105,7 +105,7 @@ public class NotesFragment extends Fragment {
             }
         });
 
-        addNoteFab = view.findViewById(R.id.add_note_fab);
+        addNoteFab = view.findViewById(R.id.add_note_fab);              // +
         addNoteFab.setOnClickListener(v -> {
 
             checkAndStartNoteEditorActivity();
@@ -191,10 +191,7 @@ public class NotesFragment extends Fragment {
         }
     }
 
-    /**
-     * Checks if SCHEDULE_EXACT_ALARM permission is granted and launches NoteEditorActivity.
-     * Requests permission if not granted on Android 12+.
-     */
+
     private void checkAndStartNoteEditorActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) { // Android 12 (API 31) and above
             AlarmManager alarmManager = (AlarmManager) requireContext().getSystemService(Context.ALARM_SERVICE);
@@ -203,10 +200,10 @@ public class NotesFragment extends Fragment {
                 Toast.makeText(requireContext(), "Please enable 'Alarms & reminders' permission for SecureNotes to auto-delete notes precisely.", Toast.LENGTH_LONG).show();
                 Intent permissionIntent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
                 requestScheduleExactAlarmPermissionLauncher.launch(permissionIntent);
-                return; // Do not launch editor now, wait for permission result
+                return;
             }
         }
-        // If permission is already granted or not needed (pre-Android 12), launch editor directly
+
         startNoteEditorActivity();
     }
 
@@ -217,8 +214,6 @@ public class NotesFragment extends Fragment {
 
     private void performExpiredNotesCleanup() {
         Log.d(TAG, "Avvio pulizia note scadute all'avvio del NotesFragment.");
-        // Chiama il ViewModel per avviare l'operazione di pulizia.
-        // Il ViewModel delegherà al Repository, che eseguirà l'operazione sul database in un thread separato.
         noteViewModel.cleanupExpiredNotes(System.currentTimeMillis());
     }
 }

@@ -95,7 +95,7 @@ public class NoteEditorActivity extends AppCompatActivity {
                         } else {
                             Log.w(TAG, "Permesso SCHEDULE_EXACT_ALARM negato dopo la richiesta.");
                             Toast.makeText(this, "Permission to set exact alarms was denied. Auto-delete notes may not work precisely.", Toast.LENGTH_LONG).show();
-                            // Resetta le variabili in sospeso, dato che l'utente ha negato
+
                             pendingNoteId = -1;
                             pendingSelfDestructTimestamp = 0;
                         }
@@ -120,7 +120,7 @@ public class NoteEditorActivity extends AppCompatActivity {
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
 
         Intent intent = getIntent();
-        if (intent.hasExtra(EXTRA_NOTE_ID)) {
+        if (intent.hasExtra(EXTRA_NOTE_ID)) {                   //se è stato passsato l'id di una nota
             setTitle("Modify note");
             noteId = intent.getIntExtra(EXTRA_NOTE_ID, -1);
             editTextTitle.setText(intent.getStringExtra(EXTRA_NOTE_TITLE));
@@ -192,17 +192,16 @@ public class NoteEditorActivity extends AppCompatActivity {
             selfDestructTimestamp = 0;
         }
 
-        if (noteId == -1) {
-            // Nuova nota: usa la callback per ottenere l'ID
+        if (noteId == -1) {             //non ho id (crazione nuova nota)
+
             Note newNote = new Note(title, content, timestamp, selfDestructTimestamp, tags);
             long finalSelfDestructTimestamp = selfDestructTimestamp;
             noteViewModel.insert(newNote, new NoteRepository.OnNoteInsertedCallback() {
                 @Override
-                public void onNoteInserted(int newNoteId) {
+                public void onNoteInserted(int newNoteId) {                                         //IMPLEMENTAZIONE del metodo di callback
                     runOnUiThread(() -> {
                         if (finalSelfDestructTimestamp > 0) {
                             Log.d(TAG, "SaveNote Callback: ID nota generato: " + newNoteId + ". Tentativo di impostare allarme.");
-                            // Chiamiamo il wrapper che gestisce il permesso
                             handleSelfDestructAlarm(newNoteId, finalSelfDestructTimestamp);
                         } else {
                             Log.d(TAG, "SaveNote Callback: ID nota generato: " + newNoteId + ". Nessun allarme da impostare.");

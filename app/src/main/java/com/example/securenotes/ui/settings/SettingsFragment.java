@@ -72,13 +72,13 @@ public class SettingsFragment extends Fragment {
 
         //scopo specifico è quello di permettere all'utente di scegliere una posizione e un nome per il file ZIP del backup
         manualBackupFileLauncher = registerForActivityResult(
-                new ActivityResultContracts.CreateDocument("application/zip"),              //Crea documento
+                new ActivityResultContracts.CreateDocument("application/zip"),              // creare un documento zip
                 uri -> {
                     if (uri != null) {
                         new Thread(() -> {
                             OutputStream outputStream = null;
                             try {
-                                outputStream = requireContext().getContentResolver().openOutputStream(uri);
+                                outputStream = requireContext().getContentResolver().openOutputStream(uri); //per scrivere
                                 if (outputStream == null) {
                                     throw new IOException("Unable to open output stream for URI:" + uri.toString());
                                 }
@@ -88,7 +88,7 @@ public class SettingsFragment extends Fragment {
                                 }
 
                                 backupManager.exportEncryptedBackup(backupPassword, outputStream);              //fa backup
-                                requireActivity().runOnUiThread(() -> Toast.makeText(getContext(), "backup created successfully!", Toast.LENGTH_LONG).show());
+                                requireActivity().runOnUiThread(() -> Toast.makeText(getContext(), "backup created successfully!", Toast.LENGTH_LONG).show());  //NEL THREAD PRINCIPALE
                             } catch (IOException | GeneralSecurityException e) {
                                 android.util.Log.e(TAG, "Errore durante l'esportazione del backup", e);
                                 requireActivity().runOnUiThread(() -> Toast.makeText(getContext(), "Error during backup: " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show());
